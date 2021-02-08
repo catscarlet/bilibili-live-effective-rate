@@ -58,6 +58,23 @@ This project is licensed under **GNU AFFERO GENERAL PUBLIC LICENSE Version 3**
             observer.observe(targetNode, config);
         };
 
+        function colorRate(effectiveRate) {
+            let color;
+            if (effectiveRate < 20) {
+                color = 'darkgreen';
+            } else if (effectiveRate < 80) {
+                color = 'green';
+            } else if (effectiveRate < 100) {
+                color = 'darkgoldenrod';
+            } else if (effectiveRate < 120) {
+                color = 'orange';
+            } else {
+                color = 'red';
+            }
+
+            return color;
+        };
+
         function addAction() {
             let centerGrid = $('.center-grid');
 
@@ -104,19 +121,7 @@ This project is licensed under **GNU AFFERO GENERAL PUBLIC LICENSE Version 3**
 
                 let effectiveRatePercent = effectiveRate + ' %';
 
-                let color;
-
-                if (effectiveRate < 20) {
-                    color = 'darkgreen';
-                } else if (effectiveRate < 80) {
-                    color = 'green';
-                } else if (effectiveRate < 100) {
-                    color = 'darkgoldenrod';
-                } else if (effectiveRate < 120) {
-                    color = 'orange';
-                } else {
-                    color = 'red';
-                }
+                let color = colorRate(effectiveRate);
 
                 let effectiveRateTd = '<td data-v-045de783="" class="effective-rate" style="color: ' + color + '">' + effectiveRatePercent + '</td>';
                 centerGridTbodyTr.find('.average-time').after(effectiveRateTd);
