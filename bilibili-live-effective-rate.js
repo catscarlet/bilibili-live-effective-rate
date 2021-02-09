@@ -75,6 +75,19 @@ This project is licensed under **GNU AFFERO GENERAL PUBLIC LICENSE Version 3**
             return color;
         };
 
+        function unitConverter(raw) {
+            let duration = raw.slice(-2);
+            let durationInMinute = 0;
+
+            if (duration == '小时') {
+                durationInMinute = parseFloat(raw.substr(0, raw.length - 2)) * 60;
+            } else {
+                durationInMinute = parseFloat(raw.substr(0, raw.length - 2));
+            }
+
+            return durationInMinute;
+        };
+
         function addAction() {
             let centerGrid = $('.center-grid');
 
@@ -100,21 +113,8 @@ This project is licensed under **GNU AFFERO GENERAL PUBLIC LICENSE Version 3**
                 let durationRaw = centerGridTbodyTr.find('.duration').text();
                 let averageTimeRaw = centerGridTbodyTr.find('.average-time').text();
 
-                let durationUnit = durationRaw.slice(-2);
-                let duration = 0;
-
-                if (durationUnit == '小时') {
-                    duration = parseFloat(durationRaw.substr(0, durationRaw.length - 2)) * 60;
-                } else {
-                    duration = parseFloat(durationRaw.substr(0, durationRaw.length - 2));
-                }
-                let averageTimeUnit = averageTimeRaw.slice(-2);
-                let averageTime = 0;
-                if (averageTimeUnit == '小时') {
-                    averageTime = parseFloat(averageTimeRaw.substr(0, averageTimeRaw.length - 2)) * 60;
-                } else {
-                    averageTime = parseFloat(averageTimeRaw.substr(0, averageTimeRaw.length - 2));
-                }
+                let duration = unitConverter(durationRaw);
+                let averageTime = unitConverter(averageTimeRaw);
 
 
                 let effectiveRate = (averageTime / duration * 100).toFixed(2);
