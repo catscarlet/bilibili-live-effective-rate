@@ -101,13 +101,12 @@ This project is licensed under **GNU AFFERO GENERAL PUBLIC LICENSE Version 3**
                 return;
             }
 
-            let effectiveHead = '<td data-v-045de783="" class="effective-rate-head">有效率</td>';
+            let effectiveHead = '<td class="effective-rate-head">有效率</td>';
             let centerGridThead = centerGrid.find('thead');
             let centerGridTbody = centerGrid.find('tbody');
             centerGridThead.find('tr').find('.average-time').after(effectiveHead);
 
             let centerGridTbodyList = centerGridTbody.find('tr');
-
             centerGridTbodyList.each(function(i) {
                 let centerGridTbodyTr = $(this);
                 let durationRaw = centerGridTbodyTr.find('.duration').text();
@@ -116,17 +115,15 @@ This project is licensed under **GNU AFFERO GENERAL PUBLIC LICENSE Version 3**
                 let duration = unitConverter(durationRaw);
                 let averageTime = unitConverter(averageTimeRaw);
 
-
                 let effectiveRate = (averageTime / duration * 100).toFixed(2);
-
                 let effectiveRatePercent = effectiveRate + ' %';
 
                 let color = colorRate(effectiveRate);
 
                 let effectiveRateTd = '<td data-v-045de783="" class="effective-rate" style="color: ' + color + '">' + effectiveRatePercent + '</td>';
                 centerGridTbodyTr.find('.average-time').after(effectiveRateTd);
-
             });
+
             centerGrid.attr('effectiveRateFlag', 1);
         }
     });
