@@ -40,6 +40,7 @@ This project is licensed under **GNU AFFERO GENERAL PUBLIC LICENSE Version 3**
         function checkUrl(url) {
             if (url == 'https://link.bilibili.com/p/center/index#/data/overview') {
                 findCenterGrid();
+                findLinkPopupCtnr();
             }
         }
 
@@ -50,6 +51,21 @@ This project is licensed under **GNU AFFERO GENERAL PUBLIC LICENSE Version 3**
                 for (let mutation of mutationsList) {
                     if (mutation.type === 'childList') {
                         addAction();
+                    } else if (mutation.type === 'attributes') {
+                    }
+                }
+            };
+            const observer = new MutationObserver(callback);
+            observer.observe(targetNode, config);
+        };
+
+        function findLinkPopupCtnr() {
+            const targetNode = document.getElementsByClassName('link-popup-ctnr')[0];
+            const config = {attributes: false, childList: true, subtree: true};
+            const callback = function(mutationsList, observer) {
+                for (let mutation of mutationsList) {
+                    if (mutation.type === 'childList') {
+                        addActionToPopup();
                     } else if (mutation.type === 'attributes') {
                     }
                 }
@@ -97,15 +113,15 @@ This project is licensed under **GNU AFFERO GENERAL PUBLIC LICENSE Version 3**
             }
 
             if (centerGrid.attr('effectiveRateFlag')) {
-                console.log('effectiveRateFlag. Return');
+                console.log('centerGrid effectiveRateFlag. Return');
                 return;
             }
 
             let effectiveHead = '<td class="effective-rate-head">有效率</td>';
             let centerGridThead = centerGrid.find('thead');
-            let centerGridTbody = centerGrid.find('tbody');
             centerGridThead.find('tr').find('.average-time').after(effectiveHead);
 
+            let centerGridTbody = centerGrid.find('tbody');
             let centerGridTbodyList = centerGridTbody.find('tr');
             centerGridTbodyList.each(function(i) {
                 let centerGridTbodyTr = $(this);
@@ -125,6 +141,48 @@ This project is licensed under **GNU AFFERO GENERAL PUBLIC LICENSE Version 3**
             });
 
             centerGrid.attr('effectiveRateFlag', 1);
+        }
+
+        function addActionToPopup() {
+            let linkPopupPanel = $('.link-popup-panel');
+            linkPopupPanel.css('width', 'max-content');
+
+            if (linkPopupPanel.length == 0) {
+                console.log('no linkPopupPanel. Return');
+                return;
+            }
+
+            if (linkPopupPanel.attr('effectiveRateFlag')) {
+                console.log('linkPopupPanel effectiveRateFlag. Return');
+                return;
+            }
+
+            let linkPopupPanelEffectiveHead = '<span class="effective-rate-head" style="display: inline-block; line-height: 38px; font-size: 12px; text-align: center;">有效率</td>';
+
+            let linkPopupPanelTitle = linkPopupPanel.find('.title');
+            linkPopupPanelTitle.find('.average-time').after(linkPopupPanelEffectiveHead);
+
+            let linkPopupPanelContent = linkPopupPanel.find('.content');
+            let linkPopupPanelContentList = linkPopupPanelContent.find('.item');
+            linkPopupPanelContentList.each(function(i) {
+                let linkPopupPanelContentItem = $(this);
+
+                let durationRaw = linkPopupPanelContentItem.find('.duration').text();
+                let averageTimeRaw = linkPopupPanelContentItem.find('.average-time').text();
+
+                let duration = unitConverter(durationRaw);
+                let averageTime = unitConverter(averageTimeRaw);
+
+                let effectiveRate = (averageTime / duration * 100).toFixed(2);
+                let effectiveRatePercent = effectiveRate + ' %';
+
+                let color = colorRate(effectiveRate);
+
+                let effectiveRateSpan = '<span class="effective-rate-item" style="color: ' + color + '; display: inline-block; line-height: 38px; font-size: 12px; text-align: center;">' + effectiveRatePercent + '</td>';
+                linkPopupPanelContentItem.find('.average-time').after(effectiveRateSpan);
+            });
+
+            linkPopupPanel.attr('effectiveRateFlag', 1);
         }
     });
 })();
