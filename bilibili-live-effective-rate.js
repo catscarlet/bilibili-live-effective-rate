@@ -1,13 +1,11 @@
 // ==UserScript==
 // @name                bilibili-live-effective-rate
-// @name:zh-CN          bilibili-live-effective-rate
 // @name:zh-HK          bilibili-live-effective-rate
 // @name:zh-TW          bilibili-live-effective-rate
 // @name:en             bilibili-live-effective-rate
 // @name:ja             bilibili-live-effective-rate
 // @namespace           https://github.com/catscarlet/bilibili-live-effective-rate
 // @description         bilibili-live-effective-rate 有效观看时长÷直播时长=直播有效率
-// @description:zh-CN   bilibili-live-effective-rate 有效观看时长÷直播时长=直播有效率
 // @description:zh-HK   bilibili-live-effective-rate 有效觀看時長÷直播時長=直播有效率
 // @description:zh-TW   bilibili-live-effective-rate 有效觀看時長÷直播時長=直播有效率
 // @description:en      bilibili-live-effective-rate Effective-watching-time / live-duration = live-effective-rate
