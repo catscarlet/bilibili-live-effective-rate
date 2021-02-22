@@ -6,7 +6,9 @@
 
 Greasy Fork: https://greasyfork.org/zh-CN/scripts/421252-bilibili-live-effective-rate
 
-![bilibili-live-effective-rate snap](snap.png "bilibili-live-effective-rate snap")
+![bilibili-live-effective-rate screenshot_CenterGrid](screenshot_CenterGrid.png "bilibili-live-effective-rate screenshot_CenterGrid")
+
+![bilibili-live-effective-rate screenshot_LinkPopupCtnr](screenshot_LinkPopupCtnr.png "bilibili-live-effective-rate screenshot_LinkPopupCtnr")
 
 I'm lazy to write the English version of README.
 
