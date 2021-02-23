@@ -76,13 +76,13 @@ This project is licensed under **GNU AFFERO GENERAL PUBLIC LICENSE Version 3**
 
         function colorRate(effectiveRate) {
             let color;
-            if (effectiveRate < 20) {
+            if (effectiveRate < 50) {
                 color = 'darkgreen';
-            } else if (effectiveRate < 80) {
-                color = 'green';
             } else if (effectiveRate < 100) {
+                color = 'green';
+            } else if (effectiveRate < 150) {
                 color = 'darkgoldenrod';
-            } else if (effectiveRate < 120) {
+            } else if (effectiveRate < 200) {
                 color = 'orange';
             } else {
                 color = 'red';
