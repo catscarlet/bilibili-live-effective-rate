@@ -36,7 +36,9 @@ This project is licensed under **GNU AFFERO GENERAL PUBLIC LICENSE Version 3**
         };
 
         function checkUrl(url) {
-            if (url == 'https://link.bilibili.com/p/center/index#/data/overview') {
+            let urlRe = new RegExp('https://link\.bilibili\.com/p/center/index\\??\\S*#/data/overview');
+            let result = urlRe.test(url);
+            if (result) {
                 findCenterGrid();
                 findLinkPopupCtnr();
             }
