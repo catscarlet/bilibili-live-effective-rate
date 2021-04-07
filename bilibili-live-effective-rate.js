@@ -10,7 +10,7 @@
 // @description:zh-TW   bilibili-live-effective-rate 有效觀看時長÷直播時長=直播有效率
 // @description:en      bilibili-live-effective-rate Effective-watching-time / live-duration = live-effective-rate
 // @description:ja      bilibili-live-effective-rate 有効観看時長÷直播時長=直播有効率
-// @version             0.2.0
+// @version             0.2.1
 // @author              catscarlet
 // @match               *://link.bilibili.com/p/center/index*
 // @require             https://code.jquery.com/jquery-latest.js
@@ -97,6 +97,8 @@ This project is licensed under **GNU AFFERO GENERAL PUBLIC LICENSE Version 3**
 
             if (duration == '小时') {
                 durationInMinute = parseFloat(raw.substr(0, raw.length - 2)) * 60;
+            } else if (duration == ' 秒') {
+                durationInMinute = parseFloat(raw.substr(0, raw.length - 2)) / 60;
             } else {
                 durationInMinute = parseFloat(raw.substr(0, raw.length - 2));
             }

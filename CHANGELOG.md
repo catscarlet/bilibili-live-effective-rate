@@ -2,6 +2,10 @@
 
 (Frome new to old)
 
+## 0.2.1
+
+- Add unit 'second' to avoid some problems.
+
 ## 0.2.0
 
 I think what I can do is done for now. There would be no more feature update.
