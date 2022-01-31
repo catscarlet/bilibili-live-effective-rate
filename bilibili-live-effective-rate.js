@@ -10,7 +10,7 @@
 // @description:zh-TW   bilibili-live-effective-rate 有效觀看時長÷直播時長=直播有效率
 // @description:en      bilibili-live-effective-rate Effective-watching-time / live-duration = live-effective-rate
 // @description:ja      bilibili-live-effective-rate 有効観看時長÷直播時長=直播有効率
-// @version             0.2.1
+// @version             0.3.0
 // @author              catscarlet
 // @match               *://link.bilibili.com/p/center/index*
 // @require             https://code.jquery.com/jquery-latest.js
@@ -36,11 +36,11 @@ This project is licensed under **GNU AFFERO GENERAL PUBLIC LICENSE Version 3**
         };
 
         function checkUrl(url) {
-            let urlRe = new RegExp('https://link\.bilibili\.com/p/center/index\\??\\S*#/data/overview');
+            let urlRe = new RegExp('https://link\.bilibili\.com/p/center/index\\??\\S*#/live-data/session-data');
             let result = urlRe.test(url);
             if (result) {
                 findCenterGrid();
-                findLinkPopupCtnr();
+                //findLinkPopupCtnr();
             }
         }
 
@@ -59,6 +59,7 @@ This project is licensed under **GNU AFFERO GENERAL PUBLIC LICENSE Version 3**
             observer.observe(targetNode, config);
         };
 
+        /*
         function findLinkPopupCtnr() {
             const targetNode = document.getElementsByClassName('link-popup-ctnr')[0];
             const config = {attributes: false, childList: true, subtree: true};
@@ -73,6 +74,7 @@ This project is licensed under **GNU AFFERO GENERAL PUBLIC LICENSE Version 3**
             const observer = new MutationObserver(callback);
             observer.observe(targetNode, config);
         };
+        */
 
         function colorRate(effectiveRate) {
             let color;
@@ -107,28 +109,45 @@ This project is licensed under **GNU AFFERO GENERAL PUBLIC LICENSE Version 3**
         };
 
         function addAction() {
-            let centerGrid = $('.center-grid');
+            let sessionDataTable = $('.session-data-table');
 
-            if (centerGrid.length == 0) {
-                console.log('no centerGrid. Return');
+
+            if (sessionDataTable.length == 0) {
                 return;
             }
 
-            if (centerGrid.attr('effectiveRateFlag')) {
-                console.log('centerGrid effectiveRateFlag. Return');
+            if (sessionDataTable.attr('effectiveRateFlag')) {
                 return;
             }
 
             let effectiveHead = '<td class="effective-rate-head">有效率</td>';
-            let centerGridThead = centerGrid.find('thead');
-            centerGridThead.find('tr').find('.average-time').after(effectiveHead);
 
-            let centerGridTbody = centerGrid.find('tbody');
-            let centerGridTbodyList = centerGridTbody.find('tr');
-            centerGridTbodyList.each(function(i) {
-                let centerGridTbodyTr = $(this);
-                let durationRaw = centerGridTbodyTr.find('.duration').text();
-                let averageTimeRaw = centerGridTbodyTr.find('.average-time').text();
+            let sessionDataTableThead = sessionDataTable.find('thead');
+
+            let sessionDataTableTheadTrList = sessionDataTableThead.find('tr');
+            sessionDataTableTheadTrList.each(function(i) {
+                let tr = $(this);
+                let tdList = tr.find('td');
+
+                let sessionDataTableTheadAverageTimeDom = $(tdList[7]);
+
+                sessionDataTableTheadAverageTimeDom.after(effectiveHead);
+
+            });
+
+
+            let sessionDataTableTbody = sessionDataTable.find('tbody');
+            let sessionDataTableTbodyTrList = sessionDataTableTbody.find('tr');
+
+            sessionDataTableTbodyTrList.each(function(i) {
+                let tr = $(this);
+                let tdList = tr.find('td');
+
+                let durationDom = $(tdList[2]);
+                let averageTimeDom = $(tdList[7]);
+
+                let durationRaw = durationDom.text();
+                let averageTimeRaw = averageTimeDom.text();
 
                 let duration = unitConverter(durationRaw);
                 let averageTime = unitConverter(averageTimeRaw);
@@ -139,12 +158,14 @@ This project is licensed under **GNU AFFERO GENERAL PUBLIC LICENSE Version 3**
                 let color = colorRate(effectiveRate);
 
                 let effectiveRateTd = '<td data-v-045de783="" class="effective-rate" style="color: ' + color + '">' + effectiveRatePercent + '</td>';
-                centerGridTbodyTr.find('.average-time').after(effectiveRateTd);
+
+                averageTimeDom.after(effectiveRateTd);
             });
 
-            centerGrid.attr('effectiveRateFlag', 1);
+            sessionDataTable.attr('effectiveRateFlag', 1);
         }
 
+        /*
         function addActionToPopup() {
             let linkPopupPanel = $('.link-popup-panel');
             linkPopupPanel.css('width', 'max-content');
@@ -186,6 +207,8 @@ This project is licensed under **GNU AFFERO GENERAL PUBLIC LICENSE Version 3**
 
             linkPopupPanel.attr('effectiveRateFlag', 1);
         }
+        */
+
     });
 })();
 
