@@ -2,6 +2,16 @@
 
 (Frome new to old)
 
+## 0.3.0
+
+The bilibili live data is changed from <https://link.bilibili.com/p/center/index#/data/overview> to <https://link.bilibili.com/p/center/index#/live-data/session-data>. A lot of things have changed. The v0.2.x branch works no more.
+
+Notice the 0.3.0 version is still using **MutationObserver** which is not necessary any more, but I'm lazy to get rid of them.
+
+The detail tab is removed from bilibili so will no longer work there.
+
+Otherwise, there isn't much changed to talk about.
+
 ## 0.2.1
 
 - Add unit 'second' to avoid some problems.
