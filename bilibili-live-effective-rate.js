@@ -16,6 +16,7 @@
 // @require             https://code.jquery.com/jquery-latest.js
 // @run-at              document-end
 // @grant               none
+// @license             GNU AGPLv3
 // ==/UserScript==
 
 /*
