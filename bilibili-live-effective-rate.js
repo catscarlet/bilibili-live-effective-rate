@@ -10,7 +10,7 @@
 // @description:zh-TW   bilibili-live-effective-rate 有效觀看時長÷直播時長=直播有效率
 // @description:en      bilibili-live-effective-rate Effective-watching-time / live-duration = live-effective-rate
 // @description:ja      bilibili-live-effective-rate 有効観看時長÷直播時長=直播有効率
-// @version             0.3.0
+// @version             0.4.0
 // @author              catscarlet
 // @match               *://link.bilibili.com/p/center/index*
 // @require             https://code.jquery.com/jquery-latest.js
@@ -121,7 +121,7 @@ This project is licensed under **GNU AFFERO GENERAL PUBLIC LICENSE Version 3**
                 return;
             }
 
-            let effectiveHead = '<td class="effective-rate-head">有效率</td>';
+            let effectiveHead = '<td class="effective-rate-head" style="width: 10em">有效率</td>';
 
             let sessionDataTableThead = sessionDataTable.find('thead');
 
@@ -130,7 +130,7 @@ This project is licensed under **GNU AFFERO GENERAL PUBLIC LICENSE Version 3**
                 let tr = $(this);
                 let tdList = tr.find('td');
 
-                let sessionDataTableTheadAverageTimeDom = $(tdList[7]);
+                let sessionDataTableTheadAverageTimeDom = $(tdList[6]);
 
                 sessionDataTableTheadAverageTimeDom.after(effectiveHead);
 
@@ -145,7 +145,7 @@ This project is licensed under **GNU AFFERO GENERAL PUBLIC LICENSE Version 3**
                 let tdList = tr.find('td');
 
                 let durationDom = $(tdList[2]);
-                let averageTimeDom = $(tdList[7]);
+                let averageTimeDom = $(tdList[6]);
 
                 let durationRaw = durationDom.text();
                 let averageTimeRaw = averageTimeDom.text();
@@ -158,7 +158,7 @@ This project is licensed under **GNU AFFERO GENERAL PUBLIC LICENSE Version 3**
 
                 let color = colorRate(effectiveRate);
 
-                let effectiveRateTd = '<td data-v-045de783="" class="effective-rate" style="color: ' + color + '">' + effectiveRatePercent + '</td>';
+                let effectiveRateTd = '<td data-v-045de783="" class="effective-rate" style="width: 10em; color: ' + color + '">' + effectiveRatePercent + '</td>';
 
                 averageTimeDom.after(effectiveRateTd);
             });
