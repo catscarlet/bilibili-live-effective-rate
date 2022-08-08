@@ -1,5 +1,9 @@
 # bilibili-live-effective-rate
 
+**Due to Bilibili, this project is dead.**
+
+---
+
 **effective-watching-time** / **live-duration** = **live-effective-rate**
 
 [简体中文 README](README_zh-cmn-Hans.md)

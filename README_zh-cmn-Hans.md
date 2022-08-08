@@ -1,5 +1,9 @@
 # bilibili-live-effective-rate
 
+**因B站原因，本项目已死。**
+
+---
+
 有效观看时长 ÷ 直播时长 = 直播有效率
 
 安装地址：https://greasyfork.org/zh-CN/scripts/421252-bilibili-live-effective-rate

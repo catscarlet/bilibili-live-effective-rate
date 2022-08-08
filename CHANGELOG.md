@@ -1,6 +1,10 @@
 # bilibili-live-effective-rate Changelog
 
-(Frome new to old)
+**Due to Bilibili, this project is dead.**
+
+---
+
+(From new to old)
 
 ## 0.4.0
 
